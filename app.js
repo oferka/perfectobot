@@ -8,7 +8,7 @@ var port = process.env.PORT || 1337;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // test route
-app.get('/', function (req, res) { res.status(200).send('Hello Perfecto Bot!'); });
+app.get('/', function (req, res) { res.status(200).send('Hello Perfecto Bot'); });
 
 app.listen(port, function () {
   console.log('Perfecto bot is listening on port ' + port);
