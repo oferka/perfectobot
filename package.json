@@ -1,7 +1,7 @@
 {
-  "name":"hellobot4",
+  "name":"perfectobot",
   "version": "0.0.1",
-  "description": "sample slack bot",
+  "description": "perfecto's slack bot",
   "main": "app.js",
   "author": "Ofer Karp",
   "license": "MIT",
