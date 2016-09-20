@@ -2,8 +2,25 @@
   "name":"perfectobot",
   "version": "0.0.1",
   "description": "perfecto's slack bot",
-  "main": "app.js",
   "author": "Ofer Karp <ofer.karp@gmail.com>",
+  "contributors": [{
+    "name": "Rotem Kaner",
+    "email": "rotemk@perfectomobile.com"
+   }],
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oferka/perfectobot"
+  },
+  "bugs": {
+    "url": "https://github.com/oferka/perfectobot/issues"
+  },
+  "keywords": [
+    "perfecto",
+    "slack",
+    "bot",
+    "slackbot"
+  ],
   "license": "MIT",
   "dependencies": {
     "express": "^4.x.x",
