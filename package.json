@@ -1,0 +1,13 @@
+{
+  "name":"hellobot4",
+  "version": "0.0.1",
+  "description": "sample slack bot",
+  "main": "app.js",
+  "author": "Ofer Karp",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.x.x",
+    "body-parser": "^1.x.x",
+    "request": "2.56.x"
+  }
+}
