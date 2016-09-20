@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "perfecto's slack bot",
   "main": "app.js",
-  "author": "Ofer Karp",
+  "author": "Ofer Karp <ofer.karp@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.x.x",
