@@ -28,7 +28,7 @@ app.post('/general', function (req, res, next) {
   //var triggerWord = req.body.trigger_word;
   var requestToApiai = apiaiapp.textRequest(triggerText);
   requestToApiai.on('response', function(response) {
-      //console.log(response);
+      console.log(response);
       console.log('id: ' + response.id);
       console.log('timestamp: ' + response.timestamp);
       console.log('source: ' + response.result.source);
@@ -54,7 +54,7 @@ app.post('/general', function (req, res, next) {
   var botPayload = {
     text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
   };
-  
+
   //preventing loop of boot responding to boot:
   if (userName !== 'slackbot') {
     return res.status(200).json(botPayload);
