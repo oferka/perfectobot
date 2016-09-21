@@ -48,7 +48,7 @@ app.post('/general', function (req, res, next) {
   //var triggerWord = req.body.trigger_word;
   var requestToApiai = apiaiapp.textRequest(triggerText);
   requestToApiai.on('response', function(response) {
-      //console.log(response);
+      console.log(response);
       id = response.id;
       console.log('id: ' + id);
       timestamp = response.timestamp;
