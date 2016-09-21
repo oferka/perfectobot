@@ -27,8 +27,9 @@ app.post('/general', function (req, res, next) {
   //the trigger word that invoked the webhook (optional when connection the webhook to a specific channel):
   //var triggerWord = req.body.trigger_word;
   var requestToApiai = apiaiapp.textRequest(triggerText);
+  var responseText = null;
   requestToApiai.on('response', function(response) {
-      console.log(response);
+      //console.log(response);
       console.log('id: ' + response.id);
       console.log('timestamp: ' + response.timestamp);
       console.log('source: ' + response.result.source);
@@ -50,13 +51,15 @@ app.post('/general', function (req, res, next) {
       console.log('statusCode: ' + response.status.code);
       console.log('statusErrorType: ' + response.status.errorType);
       console.log('sessionId: ' + response.sessionId);
+      responseText = speech;
   });
   requestToApiai.on('error', function(error) {
       console.log(error);
   });
   requestToApiai.end()
   var botPayload = {
-    text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
+    //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
+    text : responseText;
   };
 
   //preventing loop of boot responding to boot:
