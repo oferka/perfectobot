@@ -53,20 +53,20 @@ app.post('/general', function (req, res, next) {
       console.log('statusErrorType: ' + response.status.errorType);
       console.log('sessionId: ' + response.sessionId);
       responseText = speech;
+      
+      var botPayload = {
+        //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
+        text : responseText
+      };
+      //preventing loop of boot responding to boot:
+      if (userName !== 'slackbot') {
+        return res.status(200).json(botPayload);
+      } else {
+        return res.status(200).end();
+      }
   });
   requestToApiai.on('error', function(error) {
       console.log(error);
   });
-  requestToApiai.end()
-  var botPayload = {
-    text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
-    //text : responseText
-  };
-
-  //preventing loop of boot responding to boot:
-  if (userName !== 'slackbot') {
-    return res.status(200).json(botPayload);
-  } else {
-    return res.status(200).end();
-  }
+  requestToApiai.end();
 });
