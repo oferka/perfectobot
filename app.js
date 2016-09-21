@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 1337;
+var apiai = require('apiai');
+var apiaiapp = apiai("d0fd96f7a6b84f628cb20b9118cb88df");
 
 // body parser middleware
 app.use(bodyParser.urlencoded({
@@ -24,9 +26,35 @@ app.post('/general', function (req, res, next) {
   var triggerText = req.body.text;
   //the trigger word that invoked the webhook (optional when connection the webhook to a specific channel):
   //var triggerWord = req.body.trigger_word;
+  var requestToApiai = apiaiapp.textRequest(triggerText);
+  requestToApiai.on('response', function(response) {
+      //console.log(response);
+      console.log('id: ' + response.id);
+      console.log('timestamp: ' + response.timestamp);
+      console.log('source: ' + response.result.source);
+      console.log('resolvedQuery: ' + response.result.resolvedQuery);
+      console.log('action: ' + response.result.action);
+      console.log('actionIncomplete: ' + response.result.actionIncomplete);
+      console.log('time: ' + response.result.parameters.time);
+      console.log('video: ' + response.result.parameters.video);
+      console.log('contexts: ' + response.result.contexts);
+      console.log('intentId: ' + response.result.metadata.intentId);
+      console.log('webhookUsed: ' + response.result.metadata.webhookUsed);
+      console.log('intentName: ' + response.result.metadata.intentName);
+      console.log('speech: ' + response.result.fulfillment.speech);
+      console.log('score: ' + response.result.score);
+      console.log('statusCode: ' + response.status.code);
+      console.log('statusErrorType: ' + response.status.errorType);
+      console.log('sessionId: ' + response.sessionId);
+  });
+  requestToApiai.on('error', function(error) {
+      console.log(error);
+  });
+  requestToApiai.end()
   var botPayload = {
-    text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.facebook.com/'
+    text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
   };
+  
   //preventing loop of boot responding to boot:
   if (userName !== 'slackbot') {
     return res.status(200).json(botPayload);
