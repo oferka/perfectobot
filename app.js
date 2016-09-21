@@ -18,13 +18,16 @@ app.listen(port, function () {
 });
 
 app.post('/general', function (req, res, next) {
+  //the slack userName of the user who posted the message into the slack channel:
   var userName = req.body.user_name;
+  //the text that was posted into the slack channel:
   var triggerText = req.body.text;
-  var triggerWord = req.body.trigger_word;
+  //the trigger word that invoked the webhook (optional when connection the webhook to a specific channel):
+  //var triggerWord = req.body.trigger_word;
   var botPayload = {
-    text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.facebook.com/' + ' :smile'
+    text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.facebook.com/'
   };
-  // Loop otherwise..
+  //preventing loop of boot responding to boot:
   if (userName !== 'slackbot') {
     return res.status(200).json(botPayload);
   } else {
