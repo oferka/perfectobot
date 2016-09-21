@@ -93,7 +93,6 @@ app.post('/general', function (req, res, next) {
       console.log('sessionId: ' + sessionId);
       var botPayload = {
         //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
-        //text : speech
         text : speech
       };
       //preventing loop of boot responding to boot:
