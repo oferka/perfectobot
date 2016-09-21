@@ -22,7 +22,7 @@ app.post('/hello', function (req, res, next) {
   var triggerText = req.body.text;
   var triggerWord = req.body.trigger_word;
   var botPayload = {
-    text : userName + ', ' + triggerText
+    text : userName + ' said: ' + triggerText
   };
   // Loop otherwise..
   if (userName !== 'slackbot') {
