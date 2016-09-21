@@ -27,7 +27,6 @@ app.post('/general', function (req, res, next) {
   //the trigger word that invoked the webhook (optional when connection the webhook to a specific channel):
   //var triggerWord = req.body.trigger_word;
   var requestToApiai = apiaiapp.textRequest(triggerText);
-  var responseText = null;
   requestToApiai.on('response', function(response) {
       //console.log(response);
       console.log('id: ' + response.id);
@@ -52,11 +51,9 @@ app.post('/general', function (req, res, next) {
       console.log('statusCode: ' + response.status.code);
       console.log('statusErrorType: ' + response.status.errorType);
       console.log('sessionId: ' + response.sessionId);
-      responseText = speech;
-      
       var botPayload = {
         //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
-        text : responseText
+        text : speech;
       };
       //preventing loop of boot responding to boot:
       if (userName !== 'slackbot') {
