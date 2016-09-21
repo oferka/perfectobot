@@ -99,6 +99,7 @@ app.post('/general', function (req, res, next) {
       //preventing loop of boot responding to boot:
       if (userName !== 'slackbot') {
         if(intentName == 'get_tests_report') {
+          speech = null;
           return res.status(200).json(botPayload);
         }
       }
