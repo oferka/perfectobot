@@ -17,7 +17,7 @@ app.listen(port, function () {
   console.log('Perfecto bot is listening on port ' + port);
 });
 
-app.post('/hello', function (req, res, next) {
+app.post('/general', function (req, res, next) {
   var userName = req.body.user_name;
   var triggerText = req.body.text;
   var triggerWord = req.body.trigger_word;
