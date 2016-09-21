@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 app.listen(port, function () {
   console.log('Perfecto bot is listening on port ' + port);
 });
-
+var speech = null;
 app.post('/general', function (req, res, next) {
   //the slack userName of the user who posted the message into the slack channel:
   var userName = req.body.user_name;
@@ -45,7 +45,7 @@ app.post('/general', function (req, res, next) {
       console.log('intentId: ' + response.result.metadata.intentId);
       console.log('webhookUsed: ' + response.result.metadata.webhookUsed);
       console.log('intentName: ' + response.result.metadata.intentName);
-      var speech = response.result.fulfillment.speech;
+      speech = response.result.fulfillment.speech;
       console.log('speech: ' + speech);
       console.log('score: ' + response.result.score);
       console.log('statusCode: ' + response.status.code);
