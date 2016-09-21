@@ -46,7 +46,8 @@ app.post('/general', function (req, res, next) {
       console.log('intentId: ' + response.result.metadata.intentId);
       console.log('webhookUsed: ' + response.result.metadata.webhookUsed);
       console.log('intentName: ' + response.result.metadata.intentName);
-      console.log('speech: ' + response.result.fulfillment.speech);
+      var speech = response.result.fulfillment.speech;
+      console.log('speech: ' + speech);
       console.log('score: ' + response.result.score);
       console.log('statusCode: ' + response.status.code);
       console.log('statusErrorType: ' + response.status.errorType);
