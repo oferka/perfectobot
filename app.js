@@ -98,10 +98,11 @@ app.post('/general', function (req, res, next) {
       };
       //preventing loop of boot responding to boot:
       if (userName !== 'slackbot') {
-        return res.status(200).json(botPayload);
-      } //else {
-        return res.status(200).end();
-      //}
+        if(intentName == 'get_tests_report') {
+          return res.status(200).json(botPayload);
+        }
+      }
+      return res.status(200).end();
   });
   requestToApiai.on('error', function(error) {
       console.log(error);
