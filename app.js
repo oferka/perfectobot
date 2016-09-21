@@ -59,7 +59,7 @@ app.post('/general', function (req, res, next) {
   requestToApiai.end()
   var botPayload = {
     //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
-    text : responseText;
+    text : responseText
   };
 
   //preventing loop of boot responding to boot:
