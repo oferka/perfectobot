@@ -35,8 +35,12 @@ app.post('/general', function (req, res, next) {
       console.log('resolvedQuery: ' + response.result.resolvedQuery);
       console.log('action: ' + response.result.action);
       console.log('actionIncomplete: ' + response.result.actionIncomplete);
-      console.log('time: ' + response.result.parameters.time);
-      console.log('video: ' + response.result.parameters.video);
+      console.log('browser: ' + response.result.parameters.browser);
+      console.log('device: ' + response.result.parameters.device);
+      console.log('device_type: ' + response.result.parameters.device_type);
+      console.log('operating_system: ' + response.result.parameters.operating_system);
+      console.log('status: ' + response.result.parameters.status);
+      console.log('timeframe: ' + response.result.parameters.timeframe);
       console.log('contexts: ' + response.result.contexts);
       console.log('intentId: ' + response.result.metadata.intentId);
       console.log('webhookUsed: ' + response.result.metadata.webhookUsed);
