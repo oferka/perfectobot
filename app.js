@@ -48,49 +48,28 @@ app.post('/general', function (req, res, next) {
   //var triggerWord = req.body.trigger_word;
   var requestToApiai = apiaiapp.textRequest(triggerText);
   requestToApiai.on('response', function(response) {
-      //console.log(response);
+      console.log(response);
       id = response.id;
-      console.log('id: ' + id);
       timestamp = response.timestamp;
-      console.log('timestamp: ' + timestamp);
       source = response.result.source;
-      console.log('source: ' + source);
       resolvedQuery = response.result.resolvedQuery;
-      console.log('resolvedQuery: ' + resolvedQuery);
       action = response.result.action;
-      console.log('action: ' + action);
       actionIncomplete = response.result.actionIncomplete;
-      console.log('actionIncomplete: ' + actionIncomplete);
       browser = response.result.parameters.browser;
-      console.log('browser: ' + browser);
       device = response.result.parameters.device;
-      console.log('device: ' + device);
       device_type = response.result.parameters.device_type;
-      console.log('device_type: ' + device_type);
       operating_system = response.result.parameters.operating_system;
-      console.log('operating_system: ' + operating_system);
       status = response.result.parameters.status;
-      console.log('status: ' + status);
       timeframe = response.result.parameters.timeframe;
-      console.log('timeframe: ' + timeframe);
       contexts = response.result.contexts
-      console.log('contexts: ' + contexts);
       intentId = response.result.metadata.intentId;
-      console.log('intentId: ' + intentId);
       webhookUsed = response.result.metadata.webhookUsed;
-      console.log('webhookUsed: ' + webhookUsed);
       intentName = response.result.metadata.intentName;
-      console.log('intentName: ' + intentName);
       speech = response.result.fulfillment.speech;
-      console.log('speech: ' + speech);
       score = response.result.score;
-      console.log('score: ' + score);
       statusCode = response.status.code;
-      console.log('statusCode: ' + statusCode);
       statusErrorType = response.status.errorType;
-      console.log('statusErrorType: ' + statusErrorType);
       sessionId = response.sessionId;
-      console.log('sessionId: ' + sessionId);
       var botPayload = {
         //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
         text : speech
