@@ -94,7 +94,7 @@ app.post('/general', function (req, res, next) {
       var botPayload = {
         //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
         //text : speech
-        text : response.result.fulfillment.speech
+        text : speech
       };
       //preventing loop of boot responding to boot:
       if (userName !== 'slackbot') {
