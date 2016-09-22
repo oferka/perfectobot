@@ -61,7 +61,7 @@ app.post('/general', function (req, res, next) {
           status = response.result.parameters.status;
           var url = 'https://demo.reporting-01.perfectomobile.com/';
           var botPayload = {
-            text : speech
+            text : speech + ' ' + url
           };
           return res.status(200).json(botPayload);
         }
