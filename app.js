@@ -59,11 +59,19 @@ app.post('/general', function (req, res, next) {
           return res.status(200).json(botPayload);
         }
         else {
-          resolvedQuery = response.result.resolvedQuery;
-          var botPayload = {
-            text : resolvedQuery
-          };
-          return res.status(200).json(botPayload);
+          if(speech == 'For which timeframe do you want to get a report (for example last day)?') {
+            var botPayload = {
+              text : speech
+            };
+            return res.status(200).json(botPayload);
+          }
+          else {
+            resolvedQuery = response.result.resolvedQuery;
+            var botPayload = {
+              text : resolvedQuery
+            };
+            return res.status(200).json(botPayload);
+          }
         }
       }
     });
