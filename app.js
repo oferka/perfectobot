@@ -141,12 +141,6 @@ app.post('/general', function (req, res, next) {
       //resolvedQuery = response.result.resolvedQuery;
       //action = response.result.action;
       //actionIncomplete = response.result.actionIncomplete;
-      //browser = response.result.parameters.browser;
-      //device = response.result.parameters.device;
-      //device_type = response.result.parameters.device_type;
-      //operating_system = response.result.parameters.operating_system;
-      //status = response.result.parameters.status;
-      //timeframe = response.result.parameters.timeframe;
       //contexts = response.result.contexts;
       //console.log('number of contexts: ' + contexts.length);
       //if(contexts.length > 0) {
