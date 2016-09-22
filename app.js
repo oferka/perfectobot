@@ -67,6 +67,10 @@ app.post('/general', function (req, res, next) {
         }
       }
     });
+    requestToApiai.on('error', function(error) {
+        console.log(error);
+    });
+    requestToApiai.end();
   }
 
       //id = response.id;
@@ -97,8 +101,4 @@ app.post('/general', function (req, res, next) {
       //var botPayload = {
       //  text : speech
       //};
-  requestToApiai.on('error', function(error) {
-      console.log(error);
-  });
-  requestToApiai.end();
 });
