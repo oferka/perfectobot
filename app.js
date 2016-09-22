@@ -64,7 +64,7 @@ app.post('/general', function (req, res, next) {
             url = url + '?startExecutionTime[0]=' + timeframe;
           }
           status = response.result.parameters.status;
-          if(status !== '') {
+          if(status !== '' && status !== 'all') {
               var statusUrlParam = 'FAILED';
               if(status == 'Passed') {
                   var statusUrlParam = 'PASSED';
