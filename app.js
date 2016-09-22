@@ -53,7 +53,7 @@ app.post('/general', function (req, res, next) {
       if(intentName == 'get_tests_report') {
         speech = response.result.fulfillment.speech;
         if(speech == 'Here is a detailed report of all tests executed in:') {
-          device_type = response.result.parameters.device_type;
+
           operating_system = response.result.parameters.operating_system;
           var url = 'https://demo.reporting-01.perfectomobile.com/';
           timeframe = response.result.parameters.timeframe;
@@ -83,7 +83,15 @@ app.post('/general', function (req, res, next) {
             url = url + '&browserType[0]=' + browserUrlParam;
           }
           device = response.result.parameters.device;
-
+          //todo - handle device
+          device_type = response.result.parameters.device_type;
+          if(device_type !== '') {
+            var device_typeUrlParam = 'MOBILE';
+            if(device_type == 'Desktop') {
+                var device_typeUrlParam = 'DESKTOP';
+            }
+            url = url + '&deviceType[0]=' + device_typeUrlParam;
+          }
           var botPayload = {
             text : speech + ' ' + url
           };
