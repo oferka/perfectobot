@@ -66,9 +66,8 @@ app.post('/general', function (req, res, next) {
           return res.status(200).json(botPayload);
         }
       }
-    }
+    });
   }
-  return res.status(200).end();
 
       //id = response.id;
       //timestamp = response.timestamp;
