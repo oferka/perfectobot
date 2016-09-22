@@ -53,8 +53,6 @@ app.post('/general', function (req, res, next) {
       if(intentName == 'get_tests_report') {
         speech = response.result.fulfillment.speech;
         if(speech == 'Here is a detailed report of all tests executed in:') {
-
-          operating_system = response.result.parameters.operating_system;
           var url = 'https://demo.reporting-01.perfectomobile.com/';
           timeframe = response.result.parameters.timeframe;
           if(timeframe !== '') {
@@ -91,6 +89,23 @@ app.post('/general', function (req, res, next) {
                 var device_typeUrlParam = 'DESKTOP';
             }
             url = url + '&deviceType[0]=' + device_typeUrlParam;
+          }
+          operating_system = response.result.parameters.operating_system;
+          if(operating_system !== '') {
+            var operating_systemUrlParam = 'ANDROID';
+            if(operating_system == 'Blackberry') {
+                var operating_systemrlParam = 'BLACKBERRY';
+            }
+            if(operating_system == 'Windows') {
+                var operating_systemUrlParam = 'WINDOWS';
+            }
+            if(operating_system == 'iOS') {
+                var operating_systemUrlParam = 'IOS';
+            }
+            if(operating_system == 'MacOS') {
+                var operating_systemUrlParam = 'MAC';
+            }
+            url = url + '&os[0]=' + operating_systemUrlParam;
           }
           var botPayload = {
             text : speech + ' ' + url
