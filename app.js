@@ -52,7 +52,14 @@ app.post('/general', function (req, res, next) {
       intentName = response.result.metadata.intentName;
       if(intentName == 'get_tests_report') {
         speech = response.result.fulfillment.speech;
-        if(speech == 'Here is a detailed report of all tests executed in:') {
+        if(speech == 'Here is a detailed report of all tests executed in: ') {
+          timeframe = response.result.parameters.timeframe;
+          browser = response.result.parameters.browser;
+          device = response.result.parameters.device;
+          device_type = response.result.parameters.device_type;
+          operating_system = response.result.parameters.operating_system;
+          status = response.result.parameters.status;
+          var url = 'https://demo.reporting-01.perfectomobile.com/';
           var botPayload = {
             text : speech
           };
