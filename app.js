@@ -53,10 +53,8 @@ app.post('/general', function (req, res, next) {
       if(intentName == 'get_tests_report') {
         speech = response.result.fulfillment.speech;
         if(speech == 'Here is a detailed report of all tests executed in:') {
-          device = response.result.parameters.device;
           device_type = response.result.parameters.device_type;
           operating_system = response.result.parameters.operating_system;
-
           var url = 'https://demo.reporting-01.perfectomobile.com/';
           timeframe = response.result.parameters.timeframe;
           if(timeframe !== '') {
@@ -82,8 +80,10 @@ app.post('/general', function (req, res, next) {
             if(browser == 'Internet Explorer') {
                 var browserUrlParam = 'INTERNET_EXPLORER';
             }
-            url = url + '&browserType[0]' + browserUrlParam;
+            url = url + '&browserType[0]=' + browserUrlParam;
           }
+          device = response.result.parameters.device;
+
           var botPayload = {
             text : speech + ' ' + url
           };
