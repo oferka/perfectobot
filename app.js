@@ -57,11 +57,22 @@ app.post('/general', function (req, res, next) {
           device = response.result.parameters.device;
           device_type = response.result.parameters.device_type;
           operating_system = response.result.parameters.operating_system;
-          status = response.result.parameters.status;
+
           var url = 'https://demo.reporting-01.perfectomobile.com/';
           timeframe = response.result.parameters.timeframe;
           if(timeframe !== '') {
             url = url + '?startExecutionTime[0]=' + timeframe;
+          }
+          status = response.result.parameters.status;
+          if(status !== '') {
+              var statusUrlParam = 'FAILED';
+              if(status == 'Passed') {
+                  var statusUrlParam = 'PASSED';
+              }
+              if(status == 'Unknown') {
+                  var statusUrlParam = 'UNKNOWN';
+              }
+              url = url + '&status[0]=' + statusUrlParam;
           }
           var botPayload = {
             text : speech + ' ' + url
