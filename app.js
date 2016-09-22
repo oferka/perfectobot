@@ -52,7 +52,7 @@ app.post('/general', function (req, res, next) {
       intentName = response.result.metadata.intentName;
       if(intentName == 'get_tests_report') {
         speech = response.result.fulfillment.speech;
-        if(speech == 'Here is a detailed report of all tests executed in: ') {
+        if(speech == 'Here is a detailed report of all tests executed in:') {
           timeframe = response.result.parameters.timeframe;
           browser = response.result.parameters.browser;
           device = response.result.parameters.device;
