@@ -53,7 +53,6 @@ app.post('/general', function (req, res, next) {
       if(intentName == 'get_tests_report') {
         speech = response.result.fulfillment.speech;
         if(speech == 'Here is a detailed report of all tests executed in:') {
-          browser = response.result.parameters.browser;
           device = response.result.parameters.device;
           device_type = response.result.parameters.device_type;
           operating_system = response.result.parameters.operating_system;
@@ -73,6 +72,17 @@ app.post('/general', function (req, res, next) {
                   var statusUrlParam = 'UNKNOWN';
               }
               url = url + '&status[0]=' + statusUrlParam;
+          }
+          browser = response.result.parameters.browser;
+          if(browser !== '') {
+            var browserUrlParam = 'CHROME';
+            if(browser == 'Firefox') {
+                var browserUrlParam = 'FIREFOX';
+            }
+            if(browser == 'Internet Explorer') {
+                var browserUrlParam = 'INTERNET_EXPLORER';
+            }
+            url = url + '&browserType[0]' + browserUrlParam;
           }
           var botPayload = {
             text : speech + ' ' + url
