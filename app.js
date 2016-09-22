@@ -62,6 +62,7 @@ app.post('/general', function (req, res, next) {
       status = response.result.parameters.status;
       timeframe = response.result.parameters.timeframe;
       contexts = response.result.contexts;
+      console.console.log('number of contexts: ' + contexts.length);
       intentId = response.result.metadata.intentId;
       webhookUsed = response.result.metadata.webhookUsed;
       intentName = response.result.metadata.intentName;
