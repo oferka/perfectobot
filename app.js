@@ -42,50 +42,62 @@ var sessionId = null;
 app.post('/general', function (req, res, next) {
   //the slack userName of the user who posted the message into the slack channel:
   var userName = req.body.user_name;
-  //the text that was posted into the slack channel:
-  var triggerText = req.body.text;
-  //the trigger word that invoked the webhook (optional when connection the webhook to a specific channel):
-  //var triggerWord = req.body.trigger_word;
-  var requestToApiai = apiaiapp.textRequest(triggerText);
-  requestToApiai.on('response', function(response) {
+  //preventing loop of boot responding to boot:
+  if (userName !== 'slackbot') {
+    //the text that was posted into the slack channel:
+    var triggerText = req.body.text;
+    var requestToApiai = apiaiapp.textRequest(triggerText);
+    requestToApiai.on('response', function(response) {
       console.log(response);
-      id = response.id;
-      timestamp = response.timestamp;
-      source = response.result.source;
-      resolvedQuery = response.result.resolvedQuery;
-      action = response.result.action;
-      actionIncomplete = response.result.actionIncomplete;
-      browser = response.result.parameters.browser;
-      device = response.result.parameters.device;
-      device_type = response.result.parameters.device_type;
-      operating_system = response.result.parameters.operating_system;
-      status = response.result.parameters.status;
-      timeframe = response.result.parameters.timeframe;
-      contexts = response.result.contexts;
-      console.log('number of contexts: ' + contexts.length);
-      if(contexts.length > 0) {
-        console.log('context[1] name: ' + contexts[0].name);
-      }
-      intentId = response.result.metadata.intentId;
-      webhookUsed = response.result.metadata.webhookUsed;
       intentName = response.result.metadata.intentName;
-      speech = response.result.fulfillment.speech;
-      score = response.result.score;
-      statusCode = response.status.code;
-      statusErrorType = response.status.errorType;
-      sessionId = response.sessionId;
-      var botPayload = {
-        //text : userName + ' *said*: ' + triggerText + '\nsee the details here: https://www.perfectomobile.com'
-        text : speech
-      };
-      //preventing loop of boot responding to boot:
-      if (userName !== 'slackbot') {
-        if(intentName == 'get_tests_report') {
-          speech = null;
+      if(intentName == 'get_tests_report') {
+        speech = response.result.fulfillment.speech;
+        if(speech == 'Here is a detailed report of all tests executed in:') {
+          var botPayload = {
+            text : speech
+          };
+          return res.status(200).json(botPayload);
+        }
+        else {
+          resolvedQuery = response.result.resolvedQuery;
+          var botPayload = {
+            text : resolvedQuery
+          };
           return res.status(200).json(botPayload);
         }
       }
-      return res.status(200).end();
+    }
+  }
+  return res.status(200).end();
+
+      //id = response.id;
+      //timestamp = response.timestamp;
+      //source = response.result.source;
+      //resolvedQuery = response.result.resolvedQuery;
+      //action = response.result.action;
+      //actionIncomplete = response.result.actionIncomplete;
+      //browser = response.result.parameters.browser;
+      //device = response.result.parameters.device;
+      //device_type = response.result.parameters.device_type;
+      //operating_system = response.result.parameters.operating_system;
+      //status = response.result.parameters.status;
+      //timeframe = response.result.parameters.timeframe;
+      //contexts = response.result.contexts;
+      //console.log('number of contexts: ' + contexts.length);
+      //if(contexts.length > 0) {
+        //console.log('context[1] name: ' + contexts[0].name);
+      //}
+      //intentId = response.result.metadata.intentId;
+      //webhookUsed = response.result.metadata.webhookUsed;
+      //intentName = response.result.metadata.intentName;
+      //speech = response.result.fulfillment.speech;
+      //score = response.result.score;
+      //statusCode = response.status.code;
+      //statusErrorType = response.status.errorType;
+      //sessionId = response.sessionId;
+      //var botPayload = {
+      //  text : speech
+      //};
   });
   requestToApiai.on('error', function(error) {
       console.log(error);
